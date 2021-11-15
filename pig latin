@@ -1,0 +1,43 @@
+export class translator {
+    static translate(str) {
+        let arr=str.split(" ");
+        let res="";
+        for(let k=0;k<arr.length;k++){
+          let word=arr[k];
+          if ( ['a','e','i','o','u'].includes(word.slice(0,1)) ) 
+             res+=word+'ay';
+          
+          else if ( ['yt', 'xr'].includes(word.slice(0,2)) ) 
+            res+=word+'ay';
+        
+          else if(word[0]=='y')
+             res+=word.slice(1)+'yay'
+        
+          else{
+            var i=0;
+            var len=0;
+            while(i<word.length){
+               if(['a','e','i','o','u'].includes(word[i])){
+                  len=i;
+                  break;
+                }
+                else if(i!=word.length-1 && word[i]=='q' && word[i+1]=='u'){
+                   len=i+2;
+                    break;
+                }
+                else if(word[i]=='y'){
+                  len=i;
+                  break;
+                }
+                i++;
+          }
+          word=word.slice(len)+word.slice(0,len)+"ay";
+          res+=word;
+        }
+          
+        if(k!=arr.length-1)
+          res+=" ";
+        }
+        return res;
+    }
+}
